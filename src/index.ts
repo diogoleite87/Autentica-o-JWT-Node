@@ -2,16 +2,14 @@ import "express-async-errors";
 import express from 'express'
 import { AppDataSource } from './data-source'
 import { errorMidleware } from './middlewares/error'
+import routes from "./routes";
 
 AppDataSource.initialize().then(() => {
     const app = express()
 
     app.use(express.json())
 
-    app.get('/', async (req, res) => {
-
-        return res.json('Server Online')
-    })
+    app.use(routes)
 
     app.use(errorMidleware)
 
